@@ -5,6 +5,11 @@ import Home from '../Pages/Home'
 import Login from '../Pages/Login/Login'
 import Signup from '../Pages/Login/Signup'
 import Main from '../Layout/Main'
+import ComingSoon from '../Pages/Shared/ComingSoon'
+import Details from '../Pages/Details'
+import SearchResult from '../Pages/SearchResult'
+import PrivateRoute from './PrivateRoute'
+import Checkout from '../Pages/Checkout'
 
 const router = createBrowserRouter([
   {
@@ -23,6 +28,24 @@ const router = createBrowserRouter([
       {
         path: '/signup',
         element: <Signup />,
+      },
+      {
+        path: '/coming-soon',
+        element: <ComingSoon></ComingSoon>,
+      },
+      {
+        path: '/service-details',
+        element: <Details></Details>,
+      },
+      {
+        path: '/search-result',
+        element: <SearchResult></SearchResult>,
+      },
+      {
+        path: '/checkout',
+        element: <PrivateRoute>
+          <Checkout></Checkout>
+        </PrivateRoute>,
       },
     ],
   },
