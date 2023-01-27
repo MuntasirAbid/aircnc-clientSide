@@ -1,6 +1,6 @@
 import React from 'react'
 
-const WhosComing = ({ setSelectedIndex, host }) => {
+const WhosComing = ({ setSelectedIndex, host, bookingData, setBookingData }) => {
   console.log(host)
   return (
     <>
@@ -25,6 +25,8 @@ const WhosComing = ({ setSelectedIndex, host }) => {
         className='border block my-5 p-2'
         placeholder={`Hello ${host?.name}! Cant wait to spend 4 night in your home`}
         name=''
+        value={bookingData.message}
+        onChange={event => setBookingData({ ...bookingData, message: event.target.value })}
         id=''
         cols='60'
         rows='10'
