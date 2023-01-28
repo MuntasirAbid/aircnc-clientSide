@@ -32,8 +32,8 @@ const Checkout = () => {
 
     const [bookingData, setBookingData] = useState({
         homeId: homeData._id,
-        hotEmail: homeData?.host?.email,
-        message: 'hi',
+        hostEmail: homeData?.host?.email,
+        message: '',
         totalPrice: parseFloat(homeData.price) + 31,
         guestEmail: user?.email,
     })
@@ -41,6 +41,16 @@ const Checkout = () => {
 
     const handleBooking = () => {
         console.log(bookingData);
+
+        saveBooking(bookingData)
+            .then(data => {
+                console.log(data)
+                toast.success('Booking Successful')
+            })
+            .catch(err => {
+                console.log(err)
+                toast.error(err.message)
+            })
     }
 
 
