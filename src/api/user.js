@@ -22,3 +22,28 @@ export const getRole = async email => {
 
     return user?.role
 }
+
+//get all users
+export const getAllUsers = async () => {
+    const response = await fetch(`${process.env.REACT_APP_API_URL}/users`)
+    console.log('test')
+    const users = await response.json()
+
+    return users
+}
+
+//Make host
+export const makeHost = async user => {
+    delete user._id
+    const response = await fetch(`${process.env.REACT_APP_API_URL}/user/${user?.email}`, {
+        method: 'PUT',
+        headers: {
+            'content-type': 'application/json'
+        },
+        body: JSON.stringify({ ...user, role: 'host' }),
+    }
+    )
+    const users = await response.json()
+
+    return users
+}

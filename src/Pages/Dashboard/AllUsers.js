@@ -6,23 +6,23 @@ const AllUsers = () => {
     const [loading, setLoading] = useState(false)
     const [users, setUsers] = useState([])
 
-    // useEffect(() => {
-    //     getUsers()
-    // }, [])
+    useEffect(() => {
+        getUsers()
+    }, [])
 
-    // const handleRequest = user => {
-    //     makeHost(user).then(data => {
-    //         console.log(data)
-    //         getUsers()
-    //     })
-    // }
-    // const getUsers = () => {
-    //     setLoading(true)
-    //     getAllUsers().then(data => {
-    //         setUsers(data)
-    //         setLoading(false)
-    //     })
-    // }
+    const handleRequest = user => {
+        makeHost(user).then(data => {
+            console.log(data)
+            getUsers()
+        })
+    }
+    const getUsers = () => {
+        setLoading(true)
+        getAllUsers().then(data => {
+            setUsers(data)
+            setLoading(false)
+        })
+    }
 
     console.log(users)
     return (
@@ -71,7 +71,7 @@ const AllUsers = () => {
                                             <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm'>
                                                 {user?.role && user.role === 'requested' && (
                                                     <span
-                                                        // onClick={() => handleRequest(user)}
+                                                        onClick={() => handleRequest(user)}
                                                         className='relative cursor-pointer inline-block px-3 py-1 font-semibold text-green-900 leading-tight'
                                                     >
                                                         <span
