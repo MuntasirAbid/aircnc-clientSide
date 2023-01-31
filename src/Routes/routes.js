@@ -17,6 +17,7 @@ import BecomeAHost from '../Pages/Dashboard/BecomeAHost'
 import AllBookings from '../Pages/Dashboard/AllBookings'
 import AllUsers from '../Pages/Dashboard/AllUsers'
 import AddHome from '../Pages/Dashboard/AddHome'
+import ManageHomes from '../Pages/Dashboard/ManageHomes'
 
 
 const router = createBrowserRouter([
@@ -97,6 +98,12 @@ const router = createBrowserRouter([
         path: 'add-home',
         element: <PrivateRoute>
           <AddHome></AddHome>
+        </PrivateRoute>
+      },
+      {
+        path: 'manage-homes',
+        element: <PrivateRoute>
+          <ManageHomes></ManageHomes>
         </PrivateRoute>
       },
     ]

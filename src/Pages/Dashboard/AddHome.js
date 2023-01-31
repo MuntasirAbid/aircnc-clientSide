@@ -1,7 +1,7 @@
 import React, { useContext, useState } from 'react'
 import { format } from 'date-fns'
 import AddServiceForm from '../../Components/Form/AddServiceForm'
-import { getImageUrl } from '../../api/imageUpload'
+import { imageUpload } from '../../api/imageUpload'
 import { addHome } from '../../api/services'
 import { AuthContext } from '../../contexts/AuthProvider'
 import { toast } from 'react-hot-toast'
@@ -29,7 +29,7 @@ const AddHome = () => {
     const description = event.target.description.value
     const image = event.target.image.files[0]
     setLoading(true)
-    getImageUrl(image)
+    imageUpload(image)
       .then(data => {
         const homeData = {
           location,

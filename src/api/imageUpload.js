@@ -1,4 +1,4 @@
-export const getImageUrl = async image => {
+export const imageUpload = async image => {
 
     const formData = new FormData()
     formData.append('image', image)
