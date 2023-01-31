@@ -1,4 +1,3 @@
-import { data } from 'autoprefixer';
 import React from 'react';
 import { useEffect } from 'react';
 import { useState } from 'react';
@@ -20,9 +19,8 @@ const BecomeAHost = () => {
                 console.log(data)
                 setRole(data)
                 setLoading(false)
+
             })
-
-
     }, [user])
 
     const handleSubmit = event => {
@@ -39,6 +37,7 @@ const BecomeAHost = () => {
 
             //fetching host request from user API
             hostRequest(hostData).then(data => console.log(data))
+
         })
 
     }

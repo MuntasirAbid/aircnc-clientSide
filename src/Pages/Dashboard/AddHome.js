@@ -1,12 +1,16 @@
 import React, { useContext, useState } from 'react'
 import { format } from 'date-fns'
-import AddServiceForm from '../Components/Form/AddServiceForm'
-import { getImageUrl } from '../api/imageUpload'
-import { addHome } from '../api/services'
-import { AuthContext } from '../contexts/AuthProvider'
+import AddServiceForm from '../../Components/Form/AddServiceForm'
+import { getImageUrl } from '../../api/imageUpload'
+import { addHome } from '../../api/services'
+import { AuthContext } from '../../contexts/AuthProvider'
+import { toast } from 'react-hot-toast'
+import { useNavigate } from 'react-router-dom'
 
 const AddHome = () => {
+  const navigate = useNavigate()
   const { user } = useContext(AuthContext)
+  const [loading, setLoading] = useState(false)
   const [arrivalDate, setArrivalDate] = useState(new Date())
   const [departureDate, setDepartureDate] = useState(
     new Date(arrivalDate.getTime() + 24 * 60 * 60 * 1000)
@@ -16,14 +20,15 @@ const AddHome = () => {
     event.preventDefault()
     const location = event.target.location.value
     const title = event.target.title.value
-    const from = format(arrivalDate, 'P')
-    const to = format(departureDate, 'P')
+    const from = arrivalDate
+    const to = departureDate
     const price = event.target.price.value
     const total_guest = event.target.total_guest.value
     const bedrooms = event.target.bedrooms.value
     const bathrooms = event.target.bathrooms.value
     const description = event.target.description.value
     const image = event.target.image.files[0]
+    setLoading(true)
     getImageUrl(image)
       .then(data => {
         const homeData = {
@@ -46,9 +51,15 @@ const AddHome = () => {
 
         addHome(homeData).then(data => {
           console.log(data)
+          setLoading(false)
+          toast.success("Home Added!")
+          navigate('/dashboard/manage-homes')
         })
       })
-      .catch(err => console.log(err))
+      .catch(err => {
+        console.log(err)
+        setLoading(false)
+      })
   }
   return (
     <>
@@ -61,6 +72,7 @@ const AddHome = () => {
         setArrivalDate={setArrivalDate}
         departureDate={departureDate}
         setDepartureDate={setDepartureDate}
+        loading={loading}
       />
     </>
   )
