@@ -16,16 +16,21 @@ const Checkout = () => {
     const [selectedIndex, setSelectedIndex] = useState(0)
 
     const [bookingData, setBookingData] = useState({
-        homeId: checkoutData._id,
-        hostEmail: checkoutData?.host?.email,
+        home: {
+            id: checkoutData?.homeData?._id,
+            image: checkoutData?.homeData?.image,
+            title: checkoutData?.homeData?.title,
+            location: checkoutData?.homeData?.location,
+            from: checkoutData?.homeData?.from,
+            to: checkoutData?.homeData?.to,
+        },
+        hostEmail: checkoutData?.homeData?.host?.email,
         message: '',
-        totalPrice: parseFloat(checkoutData.price) + 31,
+        totalPrice: parseFloat(checkoutData?.totalPrice),
         guestEmail: user?.email,
     })
 
     const handleBooking = () => {
-        console.log(bookingData);
-
         saveBooking(bookingData)
             .then(data => {
                 console.log(data)
@@ -116,7 +121,7 @@ const Checkout = () => {
 
                             <WhosComing
                                 setSelectedIndex={setSelectedIndex}
-                                host={checkoutData?.host}
+                                host={checkoutData?.homeData?.host}
                                 bookingData={bookingData}
                                 setBookingData={setBookingData}
                             />
