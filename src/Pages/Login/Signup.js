@@ -44,6 +44,7 @@ const Signup = () => {
                 verifyEmail()
                   .then(() => {
                     toast.success('Please check your email for verification link')
+                    setLoading(false)
                     navigate(from, { replace: true })
                   })
               )
@@ -63,6 +64,7 @@ const Signup = () => {
       .then(result => {
         console.log(result.user)
         setAuthToken(result.user)
+        setLoading(false)
         navigate(from, { replace: true })
       })
   }
