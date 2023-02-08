@@ -1,8 +1,24 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
+import { getRole } from '../../api/user'
 import { AuthContext } from '../../contexts/AuthProvider'
 
 const Welcome = () => {
+
     const { user } = useContext(AuthContext)
+    const [role, setRole] = useState(null)
+    const [loading, setLoading] = useState(true)
+
+    useEffect(() => {
+        setLoading(true)
+        getRole(user?.email)
+            .then(data => {
+                console.log(data)
+                setRole(data)
+                setLoading(false)
+            })
+
+
+    }, [user])
 
     return (
         <div className='h-screen text-gray-700 flex flex-col justify-center items-center pb-16'>
@@ -13,7 +29,19 @@ const Welcome = () => {
                 <p className='text-6xl font-bold'>To</p>
             </div>
             <div className='flex justify-center text-gray-500 items-center mt-4'>
-                <p className='text-3xl font-medium'>User Dashboard</p>
+                {!loading && role ? (
+                    <>
+                        {role === 'admin' ? (
+                            <p className='text-3xl font-medium'>Admin Dashboard</p>
+                        ) : (
+                            <p className='text-3xl font-medium'>Host Dashboard</p>
+                        )}
+                    </>
+                ) : (
+                    <p className='text-3xl font-medium'>User Dashboard</p>
+                )
+
+                }
             </div>
         </div>
     )
