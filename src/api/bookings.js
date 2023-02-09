@@ -37,4 +37,19 @@ export const getAllBookings = async () => {
     return data
 }
 
-  // Cancel A booking
+// Delete a booking
+export const deleteBooking = async id => {
+    const response = await fetch(
+        `${process.env.REACT_APP_API_URL}/booking/${id}`,
+        {
+            method: 'DELETE',
+            headers: {
+                'content-type': 'application/json',
+                authorization: `Bearer ${localStorage.getItem('aircnc-token')}`,
+            },
+        }
+    )
+
+    const data = await response.json()
+    return data
+}
