@@ -3,13 +3,16 @@ import { Tab } from '@headlessui/react'
 import ReviewHouse from '../Components/Checkout/ReviewHouse'
 import CheckoutCart from '../Components/Checkout/CheckoutCart'
 import WhosComing from '../Components/Checkout/WhosComing'
-import Payment from '../Components/Checkout/Payment'
+import { Elements } from '@stripe/react-stripe-js';
 import { AuthContext } from '../contexts/AuthProvider'
-import { saveBooking } from '../api/bookings'
+
 import toast from 'react-hot-toast'
 import { useLocation } from 'react-router-dom'
+import { loadStripe } from '@stripe/stripe-js'
+import CheckoutForm from '../Components/Form/CheckoutForm'
 
 const Checkout = () => {
+    const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PUBLIC_KEY);
     const { user } = useContext(AuthContext)
     const { state: checkoutData } = useLocation()
 
@@ -26,21 +29,9 @@ const Checkout = () => {
         },
         hostEmail: checkoutData?.homeData?.host?.email,
         message: '',
-        totalPrice: parseFloat(checkoutData?.totalPrice),
+        price: parseFloat(checkoutData?.totalPrice),
         guestEmail: user?.email,
     })
-
-    const handleBooking = () => {
-        saveBooking(bookingData)
-            .then(data => {
-                console.log(data)
-                toast.success('Booking Successful')
-            })
-            .catch(err => {
-                console.log(err)
-                toast.error(err.message)
-            })
-    }
 
 
     return (
@@ -128,7 +119,11 @@ const Checkout = () => {
                         </Tab.Panel>
                         <Tab.Panel>
 
-                            <Payment handleBooking={handleBooking} />
+                            <Elements stripe={stripePromise}>
+                                <CheckoutForm bookingData={bookingData} />
+                            </Elements>
+
+
                         </Tab.Panel>
                     </Tab.Panels>
                 </Tab.Group>
