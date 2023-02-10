@@ -31,14 +31,14 @@ const TableRow = ({ booking, fetchBookings }) => {
                         <div className='block relative'>
                             <img
                                 alt='profile'
-                                src={booking?.home.image}
+                                src={booking?.home?.image}
                                 className='mx-auto object-cover rounded h-10 w-15 '
                             />
                         </div>
                     </div>
                     <div className='ml-3'>
                         <p className='text-gray-900 whitespace-no-wrap'>
-                            {booking?.home.title}
+                            {booking?.home?.title}
                         </p>
                     </div>
                 </div>
@@ -49,7 +49,7 @@ const TableRow = ({ booking, fetchBookings }) => {
                 </p>
             </td>
             <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm'>
-                <p className='text-gray-900 whitespace-no-wrap'>${booking?.totalPrice}</p>
+                <p className='text-gray-900 whitespace-no-wrap'>${booking?.price}</p>
             </td>
             <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm'>
                 <p className='text-gray-900 whitespace-no-wrap'>
