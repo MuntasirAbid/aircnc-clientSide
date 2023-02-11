@@ -3,9 +3,11 @@ import React, { useState } from 'react'
 import toast from 'react-hot-toast'
 import { deleteBooking } from '../api/bookings'
 import DeleteModal from './Modal/DeleteModal'
+import Spinner from './Spinner/Spinner'
 
 const TableRow = ({ booking, fetchBookings }) => {
     let [isOpen, setIsOpen] = useState(false)
+    const [loading, setLoading] = useState(true)
 
     function openModal() {
         setIsOpen(true)
@@ -23,6 +25,12 @@ const TableRow = ({ booking, fetchBookings }) => {
         closeModal()
     }
     console.log(booking)
+
+    // if (loading) {
+    //     <Spinner></Spinner>
+    // }
+    // setLoading(false)
+
     return (
         <tr>
             <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm'>
