@@ -1,14 +1,15 @@
 // Add a home
 export const addHome = async homeData => {
-    const response = await fetch(`${process.env.REACT_APP_API_URL}/homes`, {
-        method: 'POST',
-        headers: {
-            'content-type': 'application/json',
-            authorization: `Bearer ${localStorage.getItem('aircnc-token')}`,
-        },
-        body: JSON.stringify(homeData),
-    })
-
+    const response = await fetch(`${process.env.REACT_APP_API_URL}/homes`,
+        {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json',
+                authorization: `Bearer ${localStorage.getItem('aircnc-token')}`,
+            },
+            body: JSON.stringify(homeData),
+        }
+    )
     const data = await response.json()
     return data
 }

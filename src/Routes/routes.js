@@ -19,6 +19,8 @@ import AllUsers from '../Pages/Dashboard/AllUsers'
 import AddHome from '../Pages/Dashboard/AddHome'
 import ManageHomes from '../Pages/Dashboard/ManageHomes'
 import AllHome from '../Pages/AllHome'
+import AdminRoute from './AdminRoute'
+import HostRoute from './HostRoute'
 
 
 const router = createBrowserRouter([
@@ -86,27 +88,19 @@ const router = createBrowserRouter([
       },
       {
         path: 'all-users',
-        element: <PrivateRoute>
-          <AllUsers></AllUsers>
-        </PrivateRoute>
+        element: <AdminRoute><AllUsers></AllUsers></AdminRoute>
       },
       {
         path: 'all-bookings',
-        element: <PrivateRoute>
-          <AllBookings></AllBookings>
-        </PrivateRoute>
+        element: <AdminRoute><AllBookings></AllBookings></AdminRoute>
       },
       {
         path: 'add-home',
-        element: <PrivateRoute>
-          <AddHome></AddHome>
-        </PrivateRoute>
+        element: <HostRoute><AddHome></AddHome></HostRoute>
       },
       {
         path: 'manage-homes',
-        element: <PrivateRoute>
-          <ManageHomes></ManageHomes>
-        </PrivateRoute>
+        element: <HostRoute><ManageHomes></ManageHomes></HostRoute>
       },
     ]
   },
