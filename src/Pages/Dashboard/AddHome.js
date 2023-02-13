@@ -10,6 +10,8 @@ const AddHome = () => {
   const navigate = useNavigate()
   const { user } = useContext(AuthContext)
   const [loading, setLoading] = useState(false)
+  const [preview, setPreview] = useState('')
+  const [uploadButtonText, setUploadButtonText] = useState('Upload Image')
   const [arrivalDate, setArrivalDate] = useState(new Date())
   const [departureDate, setDepartureDate] = useState(
     new Date(arrivalDate.getTime() + 24 * 60 * 60 * 1000)
@@ -60,6 +62,13 @@ const AddHome = () => {
         setLoading(false)
       })
   }
+
+  const handleImageChange = image => {
+
+    setPreview(window.URL.createObjectURL(image))
+    setUploadButtonText(image.name)
+  }
+
   return (
     <>
       <h1 className='text-3xl font-bold text-gray-800 py-8 text-center'>
@@ -72,6 +81,9 @@ const AddHome = () => {
         departureDate={departureDate}
         setDepartureDate={setDepartureDate}
         loading={loading}
+        handleImageChange={handleImageChange}
+        preview={preview}
+        uploadButtonText={uploadButtonText}
       />
     </>
   )
