@@ -18,13 +18,17 @@ const EditModal = ({ setIsEditModalOpen, isOpen, home, fetchHomes }) => {
         to: departureDate,
     })
 
+    console.log(homeData);
+
     const handleImageUpdate = image => {
         setLoading(true)
         imageUpload(image)
             .then(res => {
-                setHomeData({ ...homeData, image: res.data.display_url })
+                console.log(res);
+                setHomeData({ ...homeData, image: res })
                 setLoading(false)
             })
+
             .catch(err => {
                 console.log(err)
                 setLoading(false)
